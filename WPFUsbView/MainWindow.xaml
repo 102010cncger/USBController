@@ -25,6 +25,9 @@
                 <Button Margin="4,0" Name="buttonOpenXML" Click="buttonOpenXML_Click">
                     <Image Source="/WPFUsbView;component/images/XML.png"></Image>
                 </Button>
+                <Button Margin="4,0" Name="buttonOperation" Click="buttonOperation_Click">
+                    <Image Source="images/usbdevice.png"></Image>
+                </Button>
             </ToolBar>
         </Grid>   
         
@@ -41,7 +44,6 @@
                         <StackPanel Orientation="Horizontal">
                             <Image VerticalAlignment="Center" Source="{Binding Icon}" Width="16" Height="16" Margin="0,0,2,2"></Image>
                             <TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
-                            <Button Click="Button_Click" Content="禁用"></Button>
                         </StackPanel>
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>

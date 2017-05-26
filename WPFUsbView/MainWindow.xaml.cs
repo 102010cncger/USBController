@@ -11,6 +11,8 @@ namespace WPFUsbView
     /// </summary>
     public partial class MainWindow : Window
     {
+        private object currentDetail;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -88,12 +90,35 @@ namespace WPFUsbView
             TreeViewUsbItem Node = e.NewValue as TreeViewUsbItem;
             if (Node != null)
             {
-                listView1.ItemsSource = ListViewUsbItem.UsbDetail(Node.Data);
+                currentDetail = Node.Data;
+                listView1.ItemsSource = ListViewUsbItem.UsbDetail(currentDetail);
+                if (currentDetail is UsbNodeConnectionInformation)
+                {
+                    buttonOperation.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    buttonOperation.Visibility = Visibility.Hidden;
+                }
+            }
+            else
+            {
+                currentDetail = null;
+                buttonOperation.Visibility = Visibility.Hidden;
             }
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+        // 启用禁用当前UsbNodeConnectionInformation
+        private void buttonOperation_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("测试");//treeView1.SelectedItem.GetType().FullName
+            if (currentDetail != null || currentDetail is UsbNodeConnectionInformation)
+            {
+                UsbNodeConnectionInformation info = (UsbNodeConnectionInformation)currentDetail;
+                MessageBox.Show(info.DeviceDescriptor.Product);
+            }
+            else
+            {
+                MessageBox.Show("请先选择一个USB节点");
+            }
         }
     }
 }
