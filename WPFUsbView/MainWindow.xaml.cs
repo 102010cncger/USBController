@@ -113,7 +113,14 @@ namespace WPFUsbView
             if (currentDetail != null || currentDetail is UsbNodeConnectionInformation)
             {
                 UsbNodeConnectionInformation info = (UsbNodeConnectionInformation)currentDetail;
-                MessageBox.Show(info.DeviceDescriptor.Product);
+                //                MessageBox.Show(info.DeviceDescriptor.Product);
+                //Disable
+                string[] devices = new string[1];
+                //                USB.CutLooseHardwareNotifications(this.Handle);
+                //                devices[0] = listBox1.SelectedItem.ToString();
+                devices[0] = info.DeviceDescriptor.Product;
+                USB.SetDeviceState(devices, false);
+//                hwh.HookHardwareNotifications(this.Handle, true);
             }
             else
             {
